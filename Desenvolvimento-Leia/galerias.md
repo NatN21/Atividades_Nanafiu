@@ -1,28 +1,30 @@
-# Natan
+## Nós dois juntos
 
-## Parte visual + organização
-
-Você pode cuidar de:
-
--   estrutura HTML
--   layout CSS
--   organização das galerias
--   responsividade básica
+-   pensar tema
+-   montar estrutura HTML
+-   decidir layout
+-   escolher imagens
 
 ----------
 
-# Pietro
+## Natan
 
-## Parte lógica/interatividade
+-   organização do código
+-   arquivo CSS
+-   parte mais complexa do JS
+-   documentação parcial
 
-Ele pode cuidar de:
+----------
 
--   JavaScript
--   eventos de clique
--   troca dinâmica de imagens
--   destaque da galeria ativa
+## Pietro :
+
+-   montar seções HTML
+-   testar funcionalidades
+-   fazer partes menores do JS (ou  não)
+-   ajudar na documentação
 
 ***Obs: Isso é apenas uma ideia, pode ser mudado***
+
 
 ---
 ## Decidir:
