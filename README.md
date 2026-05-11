@@ -1,6 +1,6 @@
 # Atividades da dula:
 ### - Natan Alexandro Silva Costa
-### - Pietro Fioresi Dopp
+### - Pietro Fiorese Dopp
 
 ## Atividades pendentes:
 - DDM apps
