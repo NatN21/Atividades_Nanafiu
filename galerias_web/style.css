@@ -1,0 +1,138 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to bottom, #111111, #1b1b1b);
+  color: white;
+  min-height: 100vh;
+}
+
+img {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 18px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+
+img:hover {
+
+  border-color: #f5d76e;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+}
+
+ul {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 10px;
+  list-style: none;
+}
+
+header {
+  text-align: center;
+  padding: 40px 20px;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+  border-bottom: 2px solid #d4af37;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+header h1 {
+  font-size: 3rem;
+  color: #f5d76e;
+  letter-spacing: 2px;
+}
+
+header p {
+  margin-top: 10px;
+  color: #d6d6d6;
+}
+
+.Galerias {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  gap: 40px;
+}
+
+.galeria {
+  width: 100%;
+  max-width: 1200px;
+  padding: 30px;
+  border-radius: 25px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease;
+}
+
+.galeria:hover {
+  transform: translateY(-5px);
+}
+
+#g1 {
+  background: linear-gradient(135deg, #4b1f1f, #7b2d2d);
+}
+#g2 {
+  background: linear-gradient(135deg, #17394a, #2d6d8c);
+}
+#g3 {
+  background: linear-gradient(135deg, #8a6418, #d49c1a);
+}
+
+.galeria h2 {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 25px;
+  color: #fff4c2;
+}
+
+.imagens {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.imagens li {
+  overflow: hidden;
+  border-radius: 18px;
+}
+
+footer {
+  width: 100%;
+  margin-top: 40px;
+  padding: 20px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.5);
+  border-top: 2px solid #d4af37;
+  color: #ddd;
+}
+
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2rem;
+  }
+
+  .galeria {
+    padding: 20px;
+  }
+
+  img {
+    width: 100%;
+    max-width: 320px;
+    height: 220px;
+  }
+}
