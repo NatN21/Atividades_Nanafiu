@@ -136,3 +136,55 @@ footer {
     height: 220px;
   }
 }
+
+.galeria-expandida {
+  min-height: 700px;
+}
+
+.descricao-galeria {
+  margin-top: 25px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  text-align: center;
+  color: #f1f1f1;
+  background: rgba(0,0,0,0.25);
+  padding: 15px;
+  border-radius: 12px;
+}
+
+.imagem-foco {
+  width: 90% !important;
+  max-width: 1000px;
+  height: 600px !important;
+  margin: 20px auto;
+  display: block;
+  object-fit: cover;
+}
+
+.seta {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.6);
+  color: white;
+  border: none;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: 0.3s;
+  z-index: 100;
+}
+
+.seta:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+.seta-esquerda {
+  left: 20px;
+}
+
+.seta-direita {
+  right: 20px;
+}
