@@ -8,18 +8,42 @@ const descricoes = {
   g3: 'As missas representam momentos de celebração, união e fé, reunindo pessoas em cerimônias religiosas importantes.'
 };
 
+const imagensExtras = {
+  catedriais: [
+    'Catedral-Brancamaior.jfif',
+    'Catedral-gotica.jfif',
+    'Catedral-goticamaior.jfif',
+    'Catedral-Marromgrande.jfif',
+    'Catedral-tijolinho.jfif'
+  ],
+
+  capelinhas: [
+    'Capela-azulestranho.jfif',
+    'Capela-brancaeazulescuro.jfif',
+    'Capela-brancaemarroz.jfif',
+    'Capela-brancaeverde.jfif',
+    'Capela-tijolinho.jfif'
+  ],
+
+  missas: [
+    'missa-aura.jfif',
+    'missa-batismo.jfif',
+    'missa-cruz-branco.jfif',
+    'missa-microfones.jfif',
+    'missa-pessoas.jfif'
+  ]
+};
+
 let imagemAtual = null;
 let galeriaAtual = null;
 let indiceAtual = 0;
 
-// CRIA O PARÁGRAFO DE DESCRIÇÃO
 function criarDescricao(galeria) {
   let descricao = galeria.querySelector('.descricao-galeria');
 
   if (!descricao) {
     descricao = document.createElement('p');
     descricao.classList.add('descricao-galeria');
-
     descricao.textContent = descricoes[galeria.id];
 
     galeria.appendChild(descricao);
@@ -28,7 +52,6 @@ function criarDescricao(galeria) {
   descricao.style.display = 'block';
 }
 
-// REMOVE DESCRIÇÃO
 function removerDescricao(galeria) {
   const descricao = galeria.querySelector('.descricao-galeria');
 
@@ -37,41 +60,56 @@ function removerDescricao(galeria) {
   }
 }
 
-// CRIA SETAS
 function criarSetas(galeria) {
-  if (galeria.querySelector('.seta-esquerda')) return;
 
-  const setaEsquerda = document.createElement('button');
-  setaEsquerda.innerHTML = '❮';
-  setaEsquerda.classList.add('seta', 'seta-esquerda');
+  let setaEsquerda = document.querySelector('.seta-esquerda');
+  let setaDireita = document.querySelector('.seta-direita');
 
-  const setaDireita = document.createElement('button');
-  setaDireita.innerHTML = '❯';
-  setaDireita.classList.add('seta', 'seta-direita');
+  if (!setaEsquerda) {
 
-  galeria.appendChild(setaEsquerda);
-  galeria.appendChild(setaDireita);
+    setaEsquerda = document.createElement('button');
 
-  setaEsquerda.addEventListener('click', () => {
-    navegarImagem(-1);
-  });
+    setaEsquerda.innerHTML = '❮';
 
-  setaDireita.addEventListener('click', () => {
-    navegarImagem(1);
-  });
+    setaEsquerda.classList.add('seta', 'seta-esquerda');
+
+    document.body.appendChild(setaEsquerda);
+
+    setaEsquerda.addEventListener('click', (evento) => {
+
+      evento.stopPropagation();
+
+      navegarImagem(-1);
+    });
+  }
+
+  if (!setaDireita) {
+
+    setaDireita = document.createElement('button');
+
+    setaDireita.innerHTML = '❯';
+
+    setaDireita.classList.add('seta', 'seta-direita');
+
+    document.body.appendChild(setaDireita);
+
+    setaDireita.addEventListener('click', (evento) => {
+
+      evento.stopPropagation();
+
+      navegarImagem(1);
+    });
+  }
 }
 
-// MOSTRA IMAGEM EM FOCO
 function focarImagem(galeria, imagem) {
   const imagens = galeria.querySelectorAll('img');
 
   imagens.forEach((img, index) => {
     img.classList.remove('imagem-foco');
-    img.style.display = 'none';
 
     if (img === imagem) {
       img.classList.add('imagem-foco');
-      img.style.display = 'block';
       indiceAtual = index;
     }
   });
@@ -82,7 +120,6 @@ function focarImagem(galeria, imagem) {
   criarSetas(galeria);
 }
 
-// NAVEGA ENTRE IMAGENS
 function navegarImagem(direcao) {
   if (!galeriaAtual) return;
 
@@ -101,62 +138,97 @@ function navegarImagem(direcao) {
   focarImagem(galeriaAtual, imagens[indiceAtual]);
 }
 
-// EVENTOS DAS GALERIAS
+function adicionarImagensExtras(galeria) {
+  const pasta = galeria.dataset.pasta;
+  const lista = galeria.querySelector('.imagens');
 
- galerias.forEach((galeria) => {
-  const container = galeria.querySelector('.container-imgs');
-  const imagens = galeria.querySelectorAll('img');
+  if (galeria.dataset.extrasCarregadas === 'true') return;
 
+  imagensExtras[pasta].forEach((nomeImagem) => {
+    const li = document.createElement('li');
+
+    li.classList.add('extra');
+
+    li.innerHTML = `
+      <img src="img/${pasta}/${nomeImagem}" alt="">
+    `;
+
+    lista.appendChild(li);
+  });
+
+  galeria.dataset.extrasCarregadas = 'true';
+}
+
+function removerImagensExtras(galeria) {
+  const extras = galeria.querySelectorAll('.extra');
+
+  extras.forEach((extra) => {
+    extra.remove();
+  });
+
+  galeria.dataset.extrasCarregadas = 'false';
+}
+
+galerias.forEach((galeria) => {
   let expandida = false;
 
-  // CLIQUE NO CONTAINER
-  container.addEventListener('click', (evento) => {
+  galeria.addEventListener('click', (evento) => {
 
-    // EVITA CONFLITO COM CLIQUE DA IMAGEM
     if (evento.target.tagName === 'IMG') return;
 
     expandida = !expandida;
 
     if (expandida) {
+
       galeria.classList.add('galeria-expandida');
 
-      imagens.forEach((img) => {
-        img.style.display = 'block';
-        img.classList.remove('imagem-foco');
-      });
+      adicionarImagensExtras(galeria);
 
       criarDescricao(galeria);
 
     } else {
-      galeria.classList.remove('galeria-expandida');
 
-      imagens.forEach((img) => {
-        img.style.display = 'block';
-        img.classList.remove('imagem-foco');
-      });
+      galeria.classList.remove('galeria-expandida');
 
       removerDescricao(galeria);
 
-      const setas = galeria.querySelectorAll('.seta');
-      setas.forEach((seta) => seta.remove());
+      removerImagensExtras(galeria);
+
+      const imagens = galeria.querySelectorAll('img');
+
+      imagens.forEach((img) => {
+        img.classList.remove('imagem-foco');
+      });
+
+      document.querySelectorAll('.seta').forEach((seta) => {
+        seta.remove();
+      });
     }
+
+    adicionarEventosImagens(galeria, expandida);
   });
 
-  // CLIQUE NAS IMAGENS
+  adicionarEventosImagens(galeria, expandida);
+});
+
+function adicionarEventosImagens(galeria, expandida) {
+  const imagens = galeria.querySelectorAll('img');
+
   imagens.forEach((imagem) => {
-    imagem.addEventListener('click', (evento) => {
+
+    imagem.onclick = (evento) => {
+
       evento.stopPropagation();
 
       if (!expandida) return;
 
       focarImagem(galeria, imagem);
-    });
+    };
   });
-});
-
-// NAVEGAÇÃO PELO TECLADO
+}
 
 document.addEventListener('keydown', (evento) => {
+
   if (!galeriaAtual) return;
 
   if (evento.key === 'ArrowLeft') {
